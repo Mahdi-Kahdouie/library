@@ -11,8 +11,10 @@ function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
 }
+const container = document.querySelector(".container");
 
 function displayBooks() {
+  container.innerHTML = "";
   myLibrary.forEach((book) => {
     const card = document.createElement("div");
     card.classList.add("card-body");
@@ -31,18 +33,30 @@ function displayBooks() {
     pages.classList.add("book-text");
     card.appendChild(pages);
 
-    const read = document.createElement("div");
-    read.textContent = `Read: ${book.read}`;
-    read.classList.add("book-text");
+    const read = document.createElement("button");
+    if (book.read == true) {
+      read.textContent = "Read";
+      read.classList.add("read-status");
+    } else {
+      read.textContent = "Not Read";
+      read.classList.add("notRead-status");
+    }
     card.appendChild(read);
+    read.addEventListener("click", () => {
+      book.readStatus();
+      displayBooks();
+    });
 
-    const container = document.querySelector(".container");
     container.appendChild(card);
   });
 }
 
-addBookToLibrary("a", "b", 100, true);
+Book.prototype.readStatus = function () {
+  this.read = !this.read;
+};
 
-addBookToLibrary("a", "b", 100, true);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
+
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
 
 displayBooks();
