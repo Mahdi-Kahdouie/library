@@ -1,14 +1,15 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.id = crypto.randomUUID();
 }
 
-function addBookToLibrary(title, author, pages, read) {
-  const newBook = new Book(title, author, pages, read);
+function addBookToLibrary(title, author, pages, read, id) {
+  const newBook = new Book(title, author, pages, read, id);
   myLibrary.push(newBook);
 }
 const container = document.querySelector(".container");
@@ -44,6 +45,18 @@ function displayBooks() {
     card.appendChild(read);
     read.addEventListener("click", () => {
       book.readStatus();
+      displayBooks();
+    });
+
+    const remove = document.createElement("button");
+    remove.textContent = "Remove";
+    remove.classList.add("removeBtn");
+    card.appendChild(remove);
+
+    remove.addEventListener("click", () => {
+      console.log(book.id);
+      const index = myLibrary.findIndex((item) => item.id === book.id);
+      myLibrary.splice(index, 1);
       displayBooks();
     });
 

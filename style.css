@@ -5,27 +5,28 @@ body {
 
 * {
   box-sizing: border-box;
-  font-family: myFont,sans-serif;
+  font-family: myFont, sans-serif;
 }
 
 @font-face {
   font-family: myFont;
-  
-  src: url(./fonts/Roboto-Regular.ttf);
-
-  font-family: library-font;
-  src: url(./fonts/fr13631857_Blacksword.otf);
+  src: url(./fonts/Roboto-Regular.woff2);
+  font-display: swap;
 }
 
-
-
+@font-face {
+  font-family: library-font;
+  src: url(./fonts/Blacksword.woff2);
+  font-display: swap;
+}
 
 .container {
   display: grid;
   grid-auto-rows: min-content;
   /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  
+  /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 270px));
+
   gap: 15px;
 }
 
@@ -36,10 +37,11 @@ body {
   color: white;
   margin: 24px 0;
   font-family: library-font;
+  grid-column: 2/3;
 }
 
 .card-body {
-  width: 100%;
+  width: 1fr;
   height: 200px;
   grid-column: auto;
   /* grid-row: 2/3; */
@@ -48,7 +50,6 @@ body {
   display: grid;
   padding: 16px;
   border-left: 8px solid #0091ff;
-  
 }
 
 .book-text {
@@ -56,19 +57,48 @@ body {
   font-size: 20px;
 }
 
-
-.read-status{
+.read-status {
   background-color: rgb(0, 114, 0);
   border-radius: 5px;
   color: #ffffff;
   font-size: 20px;
-  
 }
 
-
-.notRead-status{
+.notRead-status {
   background-color: rgba(176, 0, 0, 0.853);
   border-radius: 5px;
   color: #ffffff;
   font-size: 20px;
 }
+
+.removeBtn {
+  background-color: rgba(244, 204, 4, 0.853);
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.removeBtn:hover {
+  background-color: rgba(176, 0, 0, 0.853);
+}
+
+.top {
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  grid-auto-flow: column;
+  grid-column: 1fr 1fr 1fr;
+  
+}
+
+
+.addBook{
+  grid-column: 3/4;
+  width: 150px;
+  height: 70px;
+  border-radius: 5px;
+  background-color: rgba(246, 246, 246, 0.79);
+  margin-right: 20px;
+}
+
+
