@@ -72,4 +72,34 @@ addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
 
 addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
 
+addBookToLibrary("Atomic Habits", "James Clear", 320, true);
+
 displayBooks();
+
+const dialog = document.querySelector("#book-dialog");
+const newBookBtn = document.querySelector(".addBook");
+const closeDialogBtn = document.querySelector("#close-dialog");
+const bookForm = document.querySelector("#book-form");
+
+newBookBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeDialogBtn.addEventListener("click", () => {
+  dialog.close();
+});
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const read = document.querySelector("#read").checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+
+  bookForm.reset();
+  dialog.close();
+});
